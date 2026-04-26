@@ -24,31 +24,32 @@ Production-grade Rancher RKE2 Kubernetes cluster configuration with distributed 
 
 ## Architecture Overview
 
+## Architecture Overview
+
 ```mermaid
 flowchart TD
-    subgraph "Control Plane"
-        CP[Control Plane + etcd<br>192.168.10.10]
+    subgraph ControlPlane ["Control Plane Nodes"]
+        CP[Control Plane + etcd\n192.168.10.10]
     end
 
-    subgraph "Worker Nodes"
-        W1[Worker Node 1<br>192.168.10.11]
-        W2[Worker Node 2<br>192.168.10.12]
+    subgraph Workers ["Worker Nodes"]
+        W1[Worker 1\n192.168.10.11]
+        W2[Worker 2\n192.168.10.12]
     end
 
-    RKE2[Rancher + RKE2 Kubernetes Cluster]
+    Rancher[Rancher + RKE2 Kubernetes Cluster]
 
-    subgraph "Storage"
-        LH[Longhorn Distributed Storage<br>3 Replicas - High Availability]
+    subgraph Storage ["Longhorn Storage"]
+        LH[Distributed Storage\n3 Replicas - High Availability]
     end
 
-    Apps[Applications / Microservices<br>Banking & Health Systems<br>via Helm]
+    Apps[Applications / Microservices\nBanking & Health Systems\nvia Helm]
 
-    CP --> RKE2
-    W1 --> RKE2
-    W2 --> RKE2
-    RKE2 --> LH
-    RKE2 --> Apps
-## Quick Deployment Steps
+    CP --> Rancher
+    W1 --> Rancher
+    W2 --> Rancher
+    Rancher --> LH
+    Rancher --> Apps
 
 ### 1. Deploy Longhorn
 ```bash
