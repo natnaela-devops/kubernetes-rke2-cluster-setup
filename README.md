@@ -35,3 +35,40 @@ kubectl apply -f storageclass.yaml
 I have used similar setups to run critical health information systems and banking workloads with high availability, automated storage provisioning, and easy horizontal scaling.
 
 Feel free to use this as a reference for your own RKE2 deployments.
+
+## Architecture Diagram
+
+```mermaid
+flowchart TD
+    subgraph "Control Plane Nodes"
+        A[Control Plane + etcd\n192.168.10.10]
+    end
+
+    subgraph "Worker Nodes"
+        B[Worker Node 1\n192.168.10.11]
+        C[Worker Node 2\n192.168.10.12]
+    end
+
+    subgraph "Rancher + RKE2 Cluster"
+        D[Rancher Management\n+ RKE2 Kubernetes]
+    end
+
+    subgraph "Storage Layer"
+        E[Longhorn Distributed Storage\n3 Replicas]
+    end
+
+    subgraph "Applications"
+        F[Microservices / Banking & Health Apps\nDeployed via Helm]
+    end
+
+    A --> D
+    B --> D
+    C --> D
+    D --> E
+    D --> F
+
+    classDef highlight fill:#e3f2fd,stroke:#1976d2,stroke-width:2px;
+    class E highlight
+
+    style A fill:#fff3e0
+    style F fill:#e8f5e9
