@@ -27,3 +27,7 @@ This repository demonstrates a **production-ready Rancher RKE2 Kubernetes cluste
 2. Apply Longhorn:
    ```bash
    kubectl apply -f longhorn-storage.yaml
+3. Create StorageClass:
+   ```bash
+   kubectl apply -f storageclass.yaml
+4. Deploy sample applications using Helm
