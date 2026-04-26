@@ -1,39 +1,31 @@
 # Kubernetes RKE2 Cluster Setup with Rancher & Longhorn
 
-This repository demonstrates a **production-ready Rancher RKE2 Kubernetes cluster** configuration, similar to the high-availability setups I have deployed and maintained for banking systems and government health facilities in Ethiopia.
+This repository showcases a **production-grade Rancher RKE2 Kubernetes cluster** configuration that I have worked with in real banking and government health system environments.
 
-### Key Features
-- Rancher RKE2 cluster configuration
-- Longhorn for distributed block storage
-- Proper node roles (control-plane, etcd, worker)
-- Basic Helm chart structure for application deployment
-- Secure and scalable architecture best practices
+### What This Demonstrates
+- Setting up a secure, scalable RKE2 cluster using Rancher
+- Distributed persistent storage with Longhorn
+- Proper node role separation (control-plane + workers)
+- Basic Helm chart structure for deploying applications
 
-### Tech Stack Used
+### Tech Stack
 - Kubernetes (RKE2)
 - Rancher
-- Docker
 - Longhorn Storage
 - Helm
+- Docker
 
-### Files Included
-- `cluster.yml` — Main RKE2 cluster configuration
-- `longhorn-storage.yaml` — Longhorn deployment manifest
-- `storageclass.yaml` — Custom StorageClass for persistent volumes
-- `helm/` folder — Example Helm chart structure
+### Files in This Repository
+- `cluster.yml` – RKE2 cluster definition
+- `longhorn-storage.yaml` – Longhorn deployment
+- `storageclass.yaml` – Custom StorageClass for PVs
+- `helm/` folder – Example chart structure
 
-### How to Deploy (Example Steps)
-1. Install RKE2 on nodes following official Rancher documentation
-2. Apply Longhorn:
-   ```bash
-   kubectl apply -f longhorn-storage.yaml
-3. Create StorageClass:
-   ```bash
-   kubectl apply -f storageclass.yaml
-4. Deploy sample applications using Helm
+### Deployment Example
+```bash
+# Install Longhorn
+kubectl apply -f longhorn-storage.yaml
 
-# Real-World Application
+# Apply StorageClass
+kubectl apply -f storageclass.yaml
 
-Used similar configurations to run critical health information systems and banking microservices with high uptime, automated storage provisioning, and easy scaling.
-
-This setup helped reduce manual intervention and improved persistence reliability across multiple nodes.
