@@ -1,0 +1,23 @@
+# longhorn-storage.yaml - Longhorn distributed storage deployment
+# Apply this after RKE2 cluster is up
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: longhorn-system
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: longhorn
+  namespace: longhorn-system
+spec:
+  chart: longhorn
+  repo: https://charts.longhorn.io
+  version: "1.6.0"   # Use latest stable version
+  targetNamespace: longhorn-system
+  valuesContent: |-
+    defaultSettings:
+      replicaCount: 3
+      staleReplicaTimeout: 2880   # 48 hours
+      backupTarget: ""
