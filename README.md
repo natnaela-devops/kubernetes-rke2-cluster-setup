@@ -24,8 +24,6 @@ Production-grade Rancher RKE2 Kubernetes cluster configuration with distributed 
 
 ## Architecture Overview
 
-## Architecture Overview
-
 ```mermaid
 flowchart TD
     subgraph ControlPlane ["Control Plane Nodes"]
@@ -50,7 +48,8 @@ flowchart TD
     W2 --> Rancher
     Rancher --> LH
     Rancher --> Apps
-
+```
+## Quick Deployment Steps
 ### 1. Deploy Longhorn
 ```bash
 kubectl apply -f longhorn-storage.yaml
