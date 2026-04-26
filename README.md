@@ -31,3 +31,9 @@ This repository demonstrates a **production-ready Rancher RKE2 Kubernetes cluste
    ```bash
    kubectl apply -f storageclass.yaml
 4. Deploy sample applications using Helm
+
+# Real-World Application
+
+Used similar configurations to run critical health information systems and banking microservices with high uptime, automated storage provisioning, and easy scaling.
+
+This setup helped reduce manual intervention and improved persistence reliability across multiple nodes.
