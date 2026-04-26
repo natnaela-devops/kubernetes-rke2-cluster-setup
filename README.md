@@ -22,40 +22,32 @@ Production-grade Rancher RKE2 Kubernetes cluster configuration with distributed 
 - `storageclass.yaml` — Default StorageClass for persistent volumes
 - `helm-example/values.yaml` — Sample values for application deployment
 
-### Architecture
+## Architecture Overview
 
 ```mermaid
 flowchart TD
-    subgraph "Control Plane Nodes"
-        A[Control Plane + etcd\n192.168.10.10]
+    subgraph "Control Plane"
+        CP[Control Plane + etcd<br>192.168.10.10]
     end
 
     subgraph "Worker Nodes"
-        B[Worker Node 1\n192.168.10.11]
-        C[Worker Node 2\n192.168.10.12]
+        W1[Worker Node 1<br>192.168.10.11]
+        W2[Worker Node 2<br>192.168.10.12]
     end
 
-    subgraph "Rancher + RKE2 Cluster"
-        D[Rancher Management\n+ RKE2 Kubernetes]
+    RKE2[Rancher + RKE2 Kubernetes Cluster]
+
+    subgraph "Storage"
+        LH[Longhorn Distributed Storage<br>3 Replicas - High Availability]
     end
 
-    subgraph "Storage Layer"
-        E[Longhorn Distributed Storage\n3 Replicas - High Availability]
-    end
+    Apps[Applications / Microservices<br>Banking & Health Systems<br>via Helm]
 
-    subgraph "Applications"
-        F[Microservices & Critical Apps\nBanking & Health Systems\nDeployed via Helm]
-    end
-
-    A --> D
-    B --> D
-    C --> D
-    D --> E
-    D --> F
-
-    classDef highlight fill:#e3f2fd,stroke:#1976d2,stroke-width:2px;
-    class E highlight
-```
+    CP --> RKE2
+    W1 --> RKE2
+    W2 --> RKE2
+    RKE2 --> LH
+    RKE2 --> Apps
 ## Quick Deployment Steps
 
 ### 1. Deploy Longhorn
