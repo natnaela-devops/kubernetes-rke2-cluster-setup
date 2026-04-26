@@ -1,12 +1,13 @@
 # Kubernetes RKE2 Cluster Setup with Rancher & Longhorn
 
-This repository showcases a **production-grade Rancher RKE2 Kubernetes cluster** configuration that I have worked with in real banking and government health system environments.
+Production-grade Rancher RKE2 Kubernetes cluster configuration with distributed storage, similar to setups I have deployed for banking systems and government health facilities in Ethiopia.
 
 ### What This Demonstrates
-- Setting up a secure, scalable RKE2 cluster using Rancher
-- Distributed persistent storage with Longhorn
-- Proper node role separation (control-plane + workers)
-- Basic Helm chart structure for deploying applications
+- Secure multi-node RKE2 cluster using Rancher
+- High-availability persistent storage with Longhorn (3 replicas)
+- Node role separation (control-plane + workers)
+- Dynamic volume provisioning with custom StorageClass
+- Basic Helm deployment structure for applications
 
 ### Tech Stack
 - Kubernetes (RKE2)
@@ -15,28 +16,13 @@ This repository showcases a **production-grade Rancher RKE2 Kubernetes cluster**
 - Helm
 - Docker
 
-### Files in This Repository
-- `cluster.yml` – RKE2 cluster definition
-- `longhorn-storage.yaml` – Longhorn deployment
-- `storageclass.yaml` – Custom StorageClass for PVs
-- `helm/` folder – Example chart structure
+### Files Included
+- `cluster.yml` — RKE2 cluster definition with node roles and networking
+- `longhorn-storage.yaml` — Longhorn deployment via HelmChart
+- `storageclass.yaml` — Default StorageClass for persistent volumes
+- `helm-example/values.yaml` — Sample values for application deployment
 
-### Deployment Example
-```bash
-# Install Longhorn
-kubectl apply -f longhorn-storage.yaml
-
-# Apply StorageClass
-kubectl apply -f storageclass.yaml
-```
-
-# Real-World Context
-
-I have used similar setups to run critical health information systems and banking workloads with high availability, automated storage provisioning, and easy horizontal scaling.
-
-Feel free to use this as a reference for your own RKE2 deployments.
-
-## Architecture Diagram
+### Architecture
 
 ```mermaid
 flowchart TD
@@ -54,11 +40,11 @@ flowchart TD
     end
 
     subgraph "Storage Layer"
-        E[Longhorn Distributed Storage\n3 Replicas]
+        E[Longhorn Distributed Storage\n3 Replicas - High Availability]
     end
 
     subgraph "Applications"
-        F[Microservices / Banking & Health Apps\nDeployed via Helm]
+        F[Microservices & Critical Apps\nBanking & Health Systems\nDeployed via Helm]
     end
 
     A --> D
@@ -69,6 +55,22 @@ flowchart TD
 
     classDef highlight fill:#e3f2fd,stroke:#1976d2,stroke-width:2px;
     class E highlight
+```
+## Quick Deployment Steps
 
-    style A fill:#fff3e0
-    style F fill:#e8f5e9
+### 1. Deploy Longhorn
+```bash
+kubectl apply -f longhorn-storage.yaml
+```
+### 2. Apply StorageClass
+```bash
+kubectl apply -f storageclass.yaml
+```
+### 3. Deploy sample app with Helm (example)
+```bash
+helm install my-app ./helm-example
+```
+
+## Real-World Usage
+I have applied similar configurations to run critical health information systems and banking workloads, achieving reliable persistent storage, easy scaling, and reduced manual operations.
+Feel free to fork or use as a reference for your own RKE2 deployments.
