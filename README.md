@@ -28,4 +28,10 @@ kubectl apply -f longhorn-storage.yaml
 
 # Apply StorageClass
 kubectl apply -f storageclass.yaml
+```
 
+# Real-World Context
+
+I have used similar setups to run critical health information systems and banking workloads with high availability, automated storage provisioning, and easy horizontal scaling.
+
+Feel free to use this as a reference for your own RKE2 deployments.
