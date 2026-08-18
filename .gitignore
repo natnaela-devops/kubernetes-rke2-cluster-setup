@@ -1,11 +1,19 @@
-# Kubernetes
+# Cluster credentials and secrets
 kubeconfig
 *.kubeconfig
+*.pem
+*.key
+token
+registries.yaml
 
-# Helm
-charts/
+# Helm and validation output
+charts/*/charts/
 Chart.lock
+rendered.yaml
+.kubeconform-cache/
 
-# Temporary files
+# Local and editor files
 *.log
 .DS_Store
+.idea/
+.vscode/
