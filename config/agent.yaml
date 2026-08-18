@@ -1,0 +1,10 @@
+# Copy to /etc/rancher/rke2/config.yaml on workload nodes.
+server: https://rke2-api.example.com:9345
+token-file: /etc/rancher/rke2/token
+protect-kernel-defaults: true
+
+node-label:
+  - "node-type=worker"
+  - "environment=production-reference"
+  - "storage.longhorn.io/eligible=true"
+  - "node.longhorn.io/create-default-disk=true"

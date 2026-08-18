@@ -1,0 +1,7 @@
+apiVersion: v2
+name: platform-demo
+description: Hardened sample workload for validating the RKE2 platform reference
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+kubeVersion: ">=1.30.0-0"

@@ -1,0 +1,33 @@
+# Copy to /etc/rancher/rke2/config.yaml on the first server.
+token-file: /etc/rancher/rke2/token
+
+tls-san:
+  - rke2-api.example.com
+  - 192.0.2.10
+tls-san-security: true
+
+cluster-cidr: 10.42.0.0/16
+service-cidr: 10.43.0.0/16
+cluster-dns: 10.43.0.10
+cluster-domain: cluster.local
+cni: canal
+ingress-controller: traefik
+
+write-kubeconfig-mode: "0640"
+write-kubeconfig-group: rke2-admins
+
+profile: cis
+secrets-encryption-provider: aescbc
+audit-policy-file: /etc/rancher/rke2/audit-policy.yaml
+pod-security-admission-config-file: /etc/rancher/rke2/psa.yaml
+protect-kernel-defaults: true
+
+etcd-snapshot-schedule-cron: "0 */6 * * *"
+etcd-snapshot-retention: 14
+etcd-snapshot-compress: true
+
+node-label:
+  - "node-type=control-plane"
+  - "environment=production-reference"
+node-taint:
+  - "CriticalAddonsOnly=true:NoSchedule"

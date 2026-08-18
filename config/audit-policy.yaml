@@ -1,0 +1,26 @@
+apiVersion: audit.k8s.io/v1
+kind: Policy
+omitStages:
+  - RequestReceived
+rules:
+  # Avoid logging secret, token, or service-account contents.
+  - level: Metadata
+    resources:
+      - group: ""
+        resources:
+          - secrets
+          - serviceaccounts/token
+  # Capture request bodies for high-value authorization changes.
+  - level: RequestResponse
+    resources:
+      - group: rbac.authorization.k8s.io
+        resources:
+          - clusterrolebindings
+          - rolebindings
+    verbs:
+      - create
+      - update
+      - patch
+      - delete
+  # Record metadata for all remaining API activity.
+  - level: Metadata
