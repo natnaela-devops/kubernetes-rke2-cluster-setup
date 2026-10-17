@@ -2,7 +2,7 @@
 
 [![Validate](https://github.com/natnaela-devops/kubernetes-rke2-cluster-setup/actions/workflows/validate.yml/badge.svg)](https://github.com/natnaela-devops/kubernetes-rke2-cluster-setup/actions/workflows/validate.yml)
 
-A sanitized, production-inspired reference for building and operating an RKE2 Kubernetes platform with a highly available control plane, dedicated worker nodes, Longhorn storage, security controls, and automated manifest validation.
+A reference setup for the RKE2 cluster design I've been working with: three control-plane/etcd servers behind a stable endpoint, separate workers, and Longhorn for persistent volumes. The repository contains example configuration and checks, not a turnkey production installer.
 
 This repository demonstrates design and operational patterns. It is not a one-command production installer: addresses, DNS names, tokens, certificates, capacity, recovery objectives, and security policy must be adapted and tested for each environment.
 
@@ -53,7 +53,7 @@ flowchart TB
 
 The topology follows the RKE2 HA model: a stable registration endpoint, three server nodes for etcd quorum, and separate agents for application workloads. Rancher can import and manage the resulting cluster; Rancher installation is intentionally outside this repository.
 
-## What this demonstrates
+## What's included
 
 - Valid native RKE2 server and agent configuration files instead of an invented Kubernetes custom resource
 - Three-server etcd quorum behind a fixed registration and API endpoint
@@ -108,7 +108,7 @@ make validate
 
 The validation script uses `yamllint`, `shellcheck`, `helm`, and `kubeconform`. It fails fast when a required tool is missing and prints installation guidance.
 
-## Design decisions
+## Why I set it up this way
 
 - **No secrets in Git:** joining credentials live in a root-owned token file.
 - **No single-server HA claim:** the reference uses three server nodes because etcd requires quorum.
