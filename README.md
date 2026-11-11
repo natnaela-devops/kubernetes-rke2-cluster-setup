@@ -8,9 +8,7 @@ This repository demonstrates design and operational patterns. It is not a one-co
 
 ## CI verification and reproducibility
 
-**Latest verified successful `main` run at the time of this documentation update:** [GitHub Actions run #32111641090](https://github.com/natnaela-devops/kubernetes-rke2-cluster-setup/actions/runs/32111641090) (2026-08-18). The live [Validate workflow](https://github.com/natnaela-devops/kubernetes-rke2-cluster-setup/actions/workflows/validate.yml) and badge above show subsequent runs and their current status; the linked historical run is evidence of a specific successful execution, not a guarantee of future success.
-
-**What this run validates:** `make validate` runs YAML, shell, Helm chart, and Kubernetes manifest/schema checks. This is **static/reproducible repository validation**, not proof of a deployed HA RKE2 cluster or a tested failover.
+**What the workflow validates:** `make validate` runs YAML, shell, Helm chart, and Kubernetes manifest/schema checks. This is **static/reproducible repository validation**, not proof of a deployed HA RKE2 cluster or a tested failover.
 
 **Reproduce locally:**
 
